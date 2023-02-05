@@ -24,8 +24,8 @@ def start_monitor(chat_id, app):
 
 def monitor(chat_id, app):
     with app.app_context():
-        user = Process(chat_id)
         while True:
+            user = Process(chat_id)
             if not user.user:
                 return
             result = user.get_homework()

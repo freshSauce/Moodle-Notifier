@@ -1,5 +1,5 @@
 from flask import Flask, request
-from actions import send_message, reload_monitor
+from actions import send_message, reload_monitor, start_monitor
 from process import Process
 from database import create_db
 import os
@@ -33,6 +33,7 @@ def receive_request():
             send_message(chat_id, result["message"])
             if result["status"] == "success":
                 send_message(chat_id, "¡Iniciando monitoreo!")
+                start_monitor(chat_id, app)
 
     elif command == "/tareas":
         user = Process(chat_id)
