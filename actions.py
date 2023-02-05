@@ -18,6 +18,22 @@ def send_message(chat_id, text):
         print(result.json())
 
 
+def start_or_help(chat_id):
+    message = """¡Bienvenido a Moodle Notifier!
+Este bot busca notificarte automáticamente de las tareas que tengas en Moodle.
+¿Cómo empezar?
+El bot te pedirá que te registres con tu usuario y contraseña de Moodle.
+Por ejemplo:
+/login usuario contraseña
+Sencillo, ¿verdad? :)
+Para ver las tareas que tienes pendientes usa /homework
+Para volver a leer este menú usa /start o bien /help.
+¡Buena suerte!
+Creado por [freshSauce](https://t.me/freshSauce)
+"""
+    send_message(chat_id, message)
+
+
 def start_monitor(chat_id, app):
     executor.submit(monitor, chat_id, app)
 

@@ -1,5 +1,5 @@
 from flask import Flask, request
-from actions import send_message, reload_monitor, start_monitor
+from actions import send_message, reload_monitor, start_monitor, start_or_help
 from process import Process
 from database import create_db
 import os
@@ -22,8 +22,8 @@ def parser(request):
 def receive_request():
     chat_id, text = parser(request)
     command = text.split()[0]
-    if command == "/start":
-        send_message(chat_id, "Bienvenido al bot de Moodle ITSPA!")
+    if command == "/start" or command == "/help":
+        start_or_help(chat_id)
 
     elif command == "/login":
         args = text.split()[1:]
