@@ -3,6 +3,7 @@ from time import time
 import requests as r
 import pickle
 import re
+import os
 from models import Users
 from database import db
 
@@ -23,7 +24,7 @@ class Process:
             self.sess_key = self.user.sess_key
             self.s = r.session()
             self.s.cookies.update(pickle.loads(self.user.cookies))
-        self.login_page = "https://virtual.itspa.edu.mx/login/index.php"
+        self.login_page = f"https://{os.getenv('SCHOOL_DOMAIN')}/login/index.php"
 
     def login(self):
         self.s.cookies = r.cookies.RequestsCookieJar()
@@ -86,7 +87,7 @@ class Process:
         )
         try:
             get_calendar = self.s.post(
-                "https://virtual.itspa.edu.mx/lib/ajax/service.php",
+                f"https://{os.getenv('SCHOOL_DOMAIN')}/lib/ajax/service.php",
                 params={
                     "sesskey": self.sess_key,
                     "info": "core_calendar_get_action_events_by_timesort",
