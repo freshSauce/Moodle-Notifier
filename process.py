@@ -78,7 +78,9 @@ class Process:
 
         now = int(time())
         data = (
-            '[{"index":0,"methodname":"core_calendar_get_action_events_by_timesort","args":{"limitnum":6,"timesortfrom": '
+            '[{"index":0,\
+            "methodname":"core_calendar_get_action_events_by_timesort",\
+            "args":{"limitnum":6,"timesortfrom": '
             + str(now)
             + ', "limittononsuspendedevents":true}}]'
         )
