@@ -7,6 +7,7 @@ class Users(db.Model):
     password = db.Column(db.String, nullable=False)
     sess_key = db.Column(db.String, nullable=False)
     cookies = db.Column(db.PickleType, nullable=False)
+    homework = db.Column(db.PickleType, nullable=True)
 
 
 def create_tables(app, drop=False):

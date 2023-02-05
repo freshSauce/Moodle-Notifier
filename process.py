@@ -16,12 +16,14 @@ class Process:
             self.username = username
             self.password = password
             self.sess_key = None
+            self.homework = None
             self.s = r.session()
 
         else:
             self.username = self.user.username
             self.password = self.user.password
             self.sess_key = self.user.sess_key
+            self.homework = pickle.loads(self.user.homework)
             self.s = r.session()
             self.s.cookies.update(pickle.loads(self.user.cookies))
         self.login_page = f"https://{os.getenv('SCHOOL_DOMAIN')}/login/index.php"
@@ -56,6 +58,7 @@ class Process:
                     password=self.password,
                     sess_key=self.sess_key,
                     cookies=pickle.dumps(self.s.cookies),
+                    homework=self.homework,
                 )
                 db.session.add(user)
             else:
@@ -95,7 +98,11 @@ class Process:
                 data=data,
             )
             homework = get_calendar.json()[0].get("data").get("events")
-            if homework:
+            if homework != self.homework:
+                user = db.session.get(Users, {"telegram_id": self.telegram_id})
+                user.homework = pickle.dumps(homework)
+                db.session.commit()
+
                 return {"status": "success", "message": homework}
             else:
                 return {"status": "success", "message": "No hay tareas pendientes."}
