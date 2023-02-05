@@ -1,4 +1,4 @@
-![](https://i.ibb.co/7rLkTsh/Logo.webp)
+![](https://svgshare.com/i/q1W.svg)
 ___
 
 <!-- PROJECT SHIELDS -->
